@@ -1,0 +1,46 @@
+---
+interface Props {
+  eyebrow?: string;
+  title: string;
+  subtitle?: string;
+  breadcrumb?: { label: string; href?: string }[];
+}
+const { eyebrow, title, subtitle } = Astro.props;
+const hasVisual = Astro.slots.has("default");
+---
+
+<section class="relative overflow-hidden bg-aurora text-white">
+  <div class="absolute inset-0 bg-grid opacity-50"></div>
+  <div class="absolute -top-32 right-0 h-72 w-72 rounded-full glow-flare"></div>
+  <div class="absolute -bottom-32 left-0 h-72 w-72 rounded-full glow-accent"></div>
+
+  <div class={`relative container-page py-16 sm:py-20 ${hasVisual ? "grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center" : ""}`}>
+    <div>
+      {
+        eyebrow && (
+          <span class="eyebrow text-sm sm:text-base mb-4 bg-white/10 text-brand-100 ring-1 ring-white/15">
+            <span class="h-1.5 w-1.5 rounded-full bg-flare-light" />
+            {eyebrow}
+          </span>
+        )
+      }
+      <h1 class="max-w-3xl text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight">
+        {title}
+      </h1>
+      {
+        subtitle && (
+          <p class="mt-5 max-w-2xl text-lg leading-relaxed text-brand-100/80">
+            {subtitle}
+          </p>
+        )
+      }
+    </div>
+    {
+      hasVisual && (
+        <div class="relative">
+          <slot />
+        </div>
+      )
+    }
+  </div>
+</section>

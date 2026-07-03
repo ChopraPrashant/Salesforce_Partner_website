@@ -1,0 +1,65 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/PageHero.astro";
+import { company } from "../data/site";
+
+const sections = [
+  {
+    h: "Use of our website",
+    p: "By accessing this website, you agree to use it lawfully and not to misuse, disrupt, or attempt to gain unauthorized access to any part of the site or its systems.",
+  },
+  {
+    h: "Services",
+    p: "Information about our services is provided for general purposes. Specific deliverables, timelines, and pricing are governed by separate written agreements between Cubitous Infotech and each client.",
+  },
+  {
+    h: "Intellectual property",
+    p: "All content on this website — including text, graphics, logos, and design — is the property of Cubitous Infotech unless otherwise stated, and may not be reproduced without permission. Salesforce, Conga, and other product names are trademarks of their respective owners.",
+  },
+  {
+    h: "Third-party links",
+    p: "Our website may contain links to third-party sites. We are not responsible for the content or practices of those sites.",
+  },
+  {
+    h: "Limitation of liability",
+    p: "This website is provided on an \"as is\" basis. To the fullest extent permitted by law, Cubitous Infotech is not liable for any damages arising from the use of this website.",
+  },
+  {
+    h: "Changes to these terms",
+    p: "We may update these terms from time to time. Continued use of the website constitutes acceptance of the updated terms.",
+  },
+];
+---
+
+<Layout title="Terms of Service" description="Terms of Service for Cubitous Infotech.">
+  <PageHero
+    title="Terms of Service"
+    subtitle="The terms that govern your use of the Cubitous Infotech website."
+    breadcrumb={[{ label: "Home", href: "/" }, { label: "Terms of Service" }]}
+  />
+
+  <section class="container-page py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl">
+      <p class="text-sm text-slate-500">
+        Last updated: {new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+      </p>
+      <div class="mt-8 space-y-8">
+        {
+          sections.map((s) => (
+            <div>
+              <h2 class="text-xl font-bold text-navy">{s.h}</h2>
+              <p class="mt-2 text-slate-600 leading-relaxed">{s.p}</p>
+            </div>
+          ))
+        }
+        <div>
+          <h2 class="text-xl font-bold text-navy">Contact us</h2>
+          <p class="mt-2 text-slate-600 leading-relaxed">
+            Questions about these terms? Email
+            <a href={`mailto:${company.email}`} class="font-semibold text-brand-700 hover:underline">{company.email}</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

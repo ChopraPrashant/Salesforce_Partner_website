@@ -1,0 +1,194 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/PageHero.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import Stats from "../components/Stats.astro";
+import CTASection from "../components/CTASection.astro";
+import Icon from "../components/Icon.astro";
+import companyLogo from "../Images/Company_Logo.jpg";
+import ourStoryImage from "../Images/ourstory.png";
+import { company, values, team } from "../data/site";
+
+const missionPoints = [
+  {
+    icon: "target",
+    title: "Our Mission",
+    desc: "To help businesses unlock real, measurable value from Salesforce — through thoughtful implementation, honest guidance, and lasting partnership.",
+  },
+  {
+    icon: "eye",
+    title: "Our Vision",
+    desc: "To be the Salesforce partner of choice for growing businesses, and a launchpad for the next generation of Salesforce professionals.",
+  },
+  {
+    icon: "rocket",
+    title: "Our Promise",
+    desc: "Solutions that are architected to scale, teams that stay accountable, and outcomes we stand behind long after go-live.",
+  },
+];
+---
+
+<Layout
+  title="About Us"
+  description="Learn about Cubitous Infotech — a Salesforce consulting and implementation partner based in Ahmedabad, founded by Brijesh Mistry and Dharmesh Mistry."
+>
+  <PageHero
+    eyebrow="About Us"
+    title="Salesforce experts, invested in your success"
+    subtitle="Cubitous Infotech is a Salesforce consulting and implementation partner based in Ahmedabad, India — helping businesses turn the platform into a genuine growth engine."
+    breadcrumb={[{ label: "Home", href: "/" }, { label: "About" }]}
+  >
+    <div class="relative mx-auto max-w-md overflow-hidden rounded-3xl bg-white/95 p-6 shadow-2xl shadow-brand-950/30 ring-1 ring-white/20 sm:p-8">
+      <div class="absolute -right-20 -top-20 h-48 w-48 rounded-full glow-brand-soft opacity-50"></div>
+      <div class="absolute -bottom-20 -left-20 h-48 w-48 rounded-full glow-flare opacity-50"></div>
+      <img
+        src={companyLogo.src}
+        alt={`${company.name} logo`}
+        class="relative mx-auto h-64 w-auto max-w-full object-contain sm:h-72 lg:h-80"
+      />
+    </div>
+  </PageHero>
+
+  <!-- STORY -->
+  <section class="container-page py-14 sm:py-20">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+      <div>
+        <SectionHeading
+          align="left"
+          eyebrow="Our Story"
+          title="Built on Salesforce expertise and client trust"
+        />
+        <div class="mt-6 space-y-4 text-slate-600 leading-relaxed">
+          <p>
+            {company.name} was founded with a simple belief: Salesforce should
+            deliver real business outcomes, not just sit as expensive software.
+            We partner with organizations to implement, optimize, and support the
+            Salesforce platform end to end.
+          </p>
+          <p>
+            From Sales and Service Cloud to Revenue Cloud Advanced, Conga CPQ &
+            CLM, Experience Cloud, integrations, and AI — our team brings hands-on
+            expertise across the ecosystem. We also invest in the future of the
+            platform by training and mentoring new Salesforce professionals.
+          </p>
+          <p>
+            Headquartered at {company.address.full}, we work with clients across
+            industries and geographies.
+          </p>
+        </div>
+      </div>
+
+      <div class="reveal overflow-hidden rounded-3xl ring-1 ring-slate-100 shadow-sm">
+        <img
+          src={ourStoryImage.src}
+          alt="Training, client trust, and real org based learning at Cubitous Infotech"
+          loading="lazy"
+          class="aspect-[4/3] w-full object-cover"
+        />
+      </div>
+    </div>
+
+    <div class="mt-10 grid gap-5 lg:grid-cols-3">
+      {
+        missionPoints.map((m) => (
+          <div class="reveal card-lift group flex gap-4 rounded-2xl bg-white p-6 ring-1 ring-slate-100 shadow-sm hover:ring-brand-200 hover:shadow-lg">
+            <span class="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand-600 transition-colors group-hover:bg-brand-gradient group-hover:text-white">
+              <Icon name={m.icon} class="w-6 h-6" />
+            </span>
+            <div>
+              <h3 class="font-bold text-navy">{m.title}</h3>
+              <p class="mt-1.5 text-sm leading-relaxed text-slate-600">{m.desc}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="bg-navy-gradient py-14 sm:py-16">
+    <div class="container-page">
+      <Stats variant="dark" />
+    </div>
+  </section>
+
+  <!-- VALUES -->
+  <section class="container-page pt-10 sm:pt-14 pb-10 sm:pb-14">
+    <SectionHeading
+      eyebrow="Our Values"
+      title="What we stand for"
+      subtitle="The principles that guide how we work with every client and teammate."
+    />
+    <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        values.map((v) => (
+          <div class="reveal card-lift rounded-2xl bg-white p-6 ring-1 ring-slate-100 shadow-sm">
+            <span class="grid h-12 w-12 place-items-center rounded-xl bg-brand-50 text-brand-600">
+              <Icon name={v.icon} class="w-6 h-6" />
+            </span>
+            <h3 class="mt-5 font-bold text-navy">{v.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">{v.desc}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- LEADERSHIP -->
+  <section class="bg-slate-50/70 pt-10 sm:pt-14 pb-10 sm:pb-14">
+    <div class="container-page">
+      <SectionHeading
+        eyebrow="Leadership"
+        title="Meet the founders"
+        subtitle="Experienced leaders driving delivery excellence and platform strategy."
+      />
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 max-w-3xl mx-auto">
+        {
+          company.founders.map((f) => (
+            <div class="reveal card-lift group rounded-2xl bg-white p-7 ring-1 ring-slate-100 shadow-sm text-center hover:ring-brand-200 hover:shadow-lg">
+              <span class="mx-auto grid h-20 w-20 place-items-center rounded-full bg-brand-gradient text-2xl font-extrabold text-white shadow-lg transition-transform duration-300 group-hover:scale-105">
+                {f.initials}
+              </span>
+              <h3 class="mt-5 text-lg font-bold text-navy">{f.name}</h3>
+              <p class="text-sm font-semibold text-brand-600">{f.role}</p>
+              <p class="mt-3 text-sm leading-relaxed text-slate-600">{f.bio}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- OUR TEAM -->
+  <section class="container-page pt-10 sm:pt-14 pb-10 sm:pb-14">
+    <SectionHeading
+      eyebrow="Our Team"
+      title="The people behind Cubitous"
+      subtitle="A passionate team of Salesforce consultants, developers, and specialists dedicated to your success."
+    />
+    <div class="mt-12 grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-4">
+      {
+        team.map((member) => (
+          <div class="reveal card-lift group rounded-2xl bg-white p-5 ring-1 ring-slate-100 shadow-sm hover:ring-brand-200 hover:shadow-xl">
+            <div class="relative mx-auto aspect-square w-full overflow-hidden rounded-xl">
+              <img
+                src={member.image}
+                alt={member.name}
+                loading="lazy"
+                class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-navy/40 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+            </div>
+            <h3 class="mt-4 text-center font-bold text-navy">{member.name}</h3>
+            <p class="text-center text-sm text-brand-600">{member.role}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <CTASection
+    title="Want to work with us?"
+    subtitle="Whether you're planning a Salesforce project or looking to grow your career, we'd love to hear from you."
+  />
+</Layout>

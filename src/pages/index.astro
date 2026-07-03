@@ -1,11 +1,355 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
+import Button from "../components/Button.astro";
+import Icon from "../components/Icon.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import ServiceCard from "../components/ServiceCard.astro";
+import Stats from "../components/Stats.astro";
+import Testimonials from "../components/Testimonials.astro";
+import CTASection from "../components/CTASection.astro";
+import brillioImage from "../Images/brillio.jpeg";
+import illuminaImage from "../Images/illumina.jpeg";
+import persistentImage from "../Images/PSL.jpeg";
+import trainingInternshipImage from "../Images/Training and internship.png";
+import clientTrustImage from "../Images/Client Trust.png";
+import {
+  services,
+  values,
+  process,
+  industries,
+  faqs,
+} from "../data/site";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const featuredServiceSlugs = [
+  "salesforce-crm",
+  "sales-cloud",
+  "service-cloud",
+  "experience-cloud",
+  "conga-cpq",
+  "conga-clm",
+];
+const featuredServices = featuredServiceSlugs
+  .map((slug) => services.find((s) => s.slug === slug))
+  .filter((s): s is (typeof services)[number] => Boolean(s));
+
+const heroBadges = [
+  "Sales & Service Cloud",
+  "Revenue Cloud (RCA)",
+  "Conga CPQ & CLM",
+  "Experience Cloud",
+];
+
+const featuredProjects = [
+  {
+    tag: "Persistent",
+    image: persistentImage.src,
+    title: "Nearshore Services Operations on Salesforce",
+    metric: "40% less manual reporting",
+  },
+  {
+    tag: "Illumina",
+    image: illuminaImage.src,
+    title: "Genomics Customer Support and Case Routing",
+    metric: "30% faster case routing",
+  },
+  {
+    tag: "Brillio",
+    image: brillioImage.src,
+    title: "Digital Services Pipeline and Delivery Visibility",
+    metric: "360° account visibility",
+  },
+];
 ---
 
 <Layout>
-	<Welcome />
+  <!-- HERO -->
+  <section class="relative overflow-hidden bg-aurora text-white">
+    <div class="absolute inset-0 bg-grid opacity-50"></div>
+    <div class="absolute -top-40 -right-24 h-96 w-96 rounded-full glow-flare"></div>
+    <div class="absolute top-1/3 -left-24 h-80 w-80 rounded-full glow-accent"></div>
+
+    <div class="relative container-page pt-8 pb-20 sm:pt-12 sm:pb-24 text-center">
+      <div class="mx-auto max-w-3xl">
+        <span class="inline-flex items-center gap-2.5 rounded-full bg-white/10 px-5 py-2.5 text-sm sm:text-base font-semibold text-brand-100 ring-1 ring-white/15">
+          <span class="h-2.5 w-2.5 rounded-full bg-flare-light animate-pulse"></span>
+          Salesforce Consulting &amp; Implementation Partner
+        </span>
+
+        <h1 class="mt-6 text-4xl sm:text-6xl lg:text-7xl font-extrabold leading-[1.04] tracking-tight">
+          We help Businesses
+          <span class="text-gradient"> Grow on Salesforce</span>
+        </h1>
+
+        <p class="mx-auto mt-6 max-w-2xl text-lg sm:text-xl leading-relaxed text-brand-100/80">
+          Cubitous Infotech Designs, Builds, and Scales Salesforce Solutions —
+          from CRM and Revenue Tooling to Portals and AI — and Trains the next
+          Generation of Salesforce-Ready Developers.
+        </p>
+
+        <div class="mt-8 flex flex-col sm:flex-row justify-center gap-3">
+          <Button href="/contact" size="lg" variant="white" icon="arrow">
+            Book a Free Consultation
+          </Button>
+          <Button
+            href="/services"
+            size="lg"
+            class="glass !text-white hover:!bg-white/20"
+          >
+            Explore Our Services
+          </Button>
+        </div>
+
+        <div class="mt-10 flex flex-wrap justify-center gap-2.5">
+          {
+            heroBadges.map((b) => (
+              <span class="inline-flex items-center gap-1.5 rounded-full bg-white/5 px-3.5 py-1.5 text-xs sm:text-sm font-medium text-brand-100/90 ring-1 ring-white/10">
+                <Icon name="check" class="w-3.5 h-3.5 text-accent-light" />
+                {b}
+              </span>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- wave divider -->
+    <div class="relative">
+      <svg class="block w-full h-12 sm:h-20" viewBox="0 0 1440 100" preserveAspectRatio="none" aria-hidden="true">
+        <path fill="#ffffff" d="M0,64 C240,100 480,20 720,32 C960,44 1200,96 1440,64 L1440,100 L0,100 Z"></path>
+      </svg>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="container-page py-8 sm:py-12">
+    <div class="mb-10 flex flex-col items-center text-center">
+      <SectionHeading
+        title="Real Impact Delivered By Cubitous"
+        subtitle="A Track Record built on Successful Salesforce Delivery, Happy Clients, and Talent we've helped Grow."
+      />
+    </div>
+    <Stats />
+    <div class="mt-8 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm font-medium text-slate-500">
+      <span class="inline-flex items-center gap-2"><Icon name="badge" class="w-4 h-4 text-brand-500" /> Certified Consultants</span>
+      <span class="inline-flex items-center gap-2"><Icon name="shield" class="w-4 h-4 text-brand-500" /> Delivery-First Approach</span>
+      <span class="inline-flex items-center gap-2"><Icon name="check" class="w-4 h-4 text-brand-500" /> Long-Term Partnerships</span>
+      <span class="inline-flex items-center gap-2"><Icon name="rocket" class="w-4 h-4 text-brand-500" /> Built to Scale</span>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="bg-slate-50/70 pt-10 sm:pt-14 pb-4 sm:pb-6" id="services">
+    <div class="container-page flex flex-col items-center">
+      <SectionHeading
+        eyebrow="What We Do"
+        title="End-to-end Salesforce Services"
+        subtitle="From first Implementation to ongoing Optimization, We cover the full Salesforce Ecosystem your Business relies on."
+      />
+      <div class="mt-12 grid w-full gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {featuredServices.map((s) => <ServiceCard service={s} />)}
+      </div>
+      <div class="mt-8 text-center">
+        <Button href="/services" variant="primary" size="lg" icon="arrow">
+          View All Services
+        </Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY US -->
+  <section class="container-page pt-4 sm:pt-6 pb-10 sm:pb-14">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <div>
+        <SectionHeading
+          align="left"
+          eyebrow="Why Cubitous"
+          title="A Partner Invested in Your Outcomes"
+          subtitle="We Combine Deep Salesforce Expertise with a Genuine Focus on Adoption and Long-Term value — not just Go-Live."
+        />
+        <div class="mt-8 grid sm:grid-cols-2 gap-5">
+          {
+            values.map((v) => (
+              <div class="reveal card-lift group flex gap-4 rounded-2xl bg-white p-5 ring-1 ring-slate-100 shadow-sm hover:ring-brand-200 hover:shadow-lg">
+                <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand-600 transition-colors group-hover:bg-brand-gradient group-hover:text-white">
+                  <Icon name={v.icon} class="w-5 h-5" />
+                </span>
+                <div>
+                  <h3 class="font-bold text-navy">{v.title}</h3>
+                  <p class="mt-1 text-sm leading-relaxed text-slate-600">{v.desc}</p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+
+      <div class="relative">
+        <div class="overflow-hidden rounded-3xl ring-1 ring-slate-100 shadow-xl">
+          <img
+            src={clientTrustImage.src}
+            alt="Client trust — built on transparency, driven by results"
+            loading="lazy"
+            class="aspect-[4/3] w-full object-cover"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="bg-navy-gradient py-10 sm:py-14 text-white relative overflow-hidden">
+    <div class="absolute inset-0 bg-grid opacity-40"></div>
+    <div class="relative container-page">
+      <SectionHeading
+        variant="light"
+        eyebrow="How We Work"
+        title="A Proven Delivery Process"
+        subtitle="Clear, Collaborative, and Built to reduce Risk at Every Step."
+        class="[&_span]:!text-brand-300"
+      />
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+        {
+          process.map((p) => (
+            <div class="reveal relative rounded-2xl bg-white/5 p-6 ring-1 ring-white/10 transition-all duration-300 hover:-translate-y-1.5 hover:bg-white/10 hover:ring-white/25">
+              <span class="text-3xl font-extrabold text-gradient">{p.step}</span>
+              <h3 class="mt-3 font-bold text-white">{p.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-brand-100/75">{p.desc}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- INDUSTRIES -->
+  <section class="container-page pt-10 sm:pt-14 pb-8 sm:pb-10">
+    <SectionHeading
+      eyebrow="Industries"
+      title="Experience Across Industries"
+      subtitle="We tailor Salesforce to the Realities of Your Sector."
+    />
+    <div class="mt-10 flex flex-wrap justify-center gap-3">
+      {
+        industries.map((ind) => (
+          <span class="inline-flex items-center gap-2 rounded-full bg-slate-50 px-4 py-2.5 text-sm font-medium text-slate-700 ring-1 ring-slate-100 transition-all duration-200 hover:-translate-y-0.5 hover:bg-brand-50 hover:text-brand-700 hover:ring-brand-200">
+            <Icon name="check" class="w-4 h-4 text-brand-500" />
+            {ind}
+          </span>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- PROJECTS DELIVERED -->
+  <section class="container-page pt-8 sm:pt-10 pb-8 sm:pb-10">
+    <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
+      <SectionHeading
+        align="left"
+        eyebrow="Projects Delivered"
+        title="Outcomes We Have Delivered"
+        subtitle="Real results across CPQ, Sales Cloud, Experience Cloud, and integrations."
+        class="max-w-none lg:[&>h2]:whitespace-nowrap"
+      />
+    </div>
+
+    <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        featuredProjects.map((p) => (
+          <a
+            href="/projects"
+            class="reveal card-lift group flex flex-col overflow-hidden rounded-2xl bg-white ring-1 ring-slate-100 shadow-sm hover:ring-brand-200 hover:shadow-xl"
+          >
+            <div class="relative h-56 overflow-hidden bg-slate-100">
+              <img
+                src={p.image}
+                alt={p.title}
+                loading="lazy"
+                class="h-full w-full object-contain transition-transform duration-500 group-hover:scale-[1.02]"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/25 to-transparent" />
+              <span class="absolute bottom-4 left-4 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-slate-700">
+                {p.tag}
+              </span>
+            </div>
+            <div class="flex flex-1 flex-col p-6">
+              <h3 class="font-bold text-navy">{p.title}</h3>
+              <div class="mt-4 flex items-center gap-2 text-sm font-semibold text-brand-600">
+                <Icon name="chart" class="w-4 h-4" />
+                {p.metric}
+              </div>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+    <div class="mt-8 text-center">
+      <Button href="/projects" variant="outline" icon="arrow">
+        View all projects
+      </Button>
+    </div>
+  </section>
+
+  <!-- TRAINING -->
+  <section class="bg-slate-50/70 pt-6 sm:pt-8 pb-8 sm:pb-10">
+    <div class="container-page grid lg:grid-cols-2 gap-12 items-start">
+      <div class="relative order-2 lg:order-1">
+        <div class="overflow-hidden rounded-3xl ring-1 ring-slate-100 shadow-sm">
+          <img
+            src={trainingInternshipImage.src}
+            alt="Training & internship — learn, practice, grow"
+            loading="lazy"
+            class="aspect-[4/3] w-full object-cover"
+          />
+        </div>
+      </div>
+      <div class="order-1 lg:order-2">
+        <SectionHeading
+          align="left"
+          eyebrow="Training & Internships"
+          title="We build Salesforce-ready Talent"
+          subtitle="Our Mentor-led Training and Internship Programs turn Freshers and Career-Switchers into Job-Ready Salesforce Administrators, Developers, and CPQ Specialists — with Real Project Experience."
+        />
+        <div class="mt-8">
+          <Button href="/training" size="lg" icon="arrow">Explore Training Programs</Button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <Testimonials />
+
+  <!-- FAQ -->
+  <section class="bg-slate-50/70 pt-6 sm:pt-8 pb-8 sm:pb-10">
+    <div class="container-page">
+      <SectionHeading
+        eyebrow="FAQ"
+        title="Frequently asked questions"
+        subtitle="Everything you need to know about working with Cubitous Infotech."
+      />
+      <div class="mx-auto mt-12 max-w-4xl space-y-4">
+        {
+          faqs.slice(0, 5).map((item, index) => (
+            <details
+              class="group rounded-2xl bg-white p-5 ring-1 ring-slate-100 shadow-sm open:ring-brand-200 open:shadow-md"
+              open={index === 0}
+            >
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-left">
+                <span class="text-base font-bold text-navy sm:text-lg">{item.q}</span>
+                <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-brand-50 text-brand-600 transition-transform group-open:rotate-45">
+                  <Icon name="arrow" class="h-4 w-4 rotate-45" />
+                </span>
+              </summary>
+              <p class="mt-4 border-t border-slate-100 pt-4 text-sm leading-relaxed text-slate-600 sm:text-base">
+                {item.a}
+              </p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <CTASection />
 </Layout>

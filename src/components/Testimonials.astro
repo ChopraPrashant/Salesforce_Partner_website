@@ -1,0 +1,36 @@
+---
+import { testimonials } from "../data/site";
+import SectionHeading from "./SectionHeading.astro";
+---
+
+<section class="container-page pt-6 sm:pt-8 pb-8 sm:pb-10">
+  <SectionHeading
+    eyebrow="Testimonials"
+    title="Trusted by teams that run on Salesforce"
+    subtitle="We build long-term partnerships. Here's what working with Cubitous Infotech feels like."
+  />
+
+  <div class="mt-12 grid gap-6 md:grid-cols-3">
+    {
+      testimonials.map((t) => (
+        <figure class="reveal card-lift flex flex-col rounded-2xl bg-white p-7 ring-1 ring-slate-100 shadow-sm hover:ring-brand-200 hover:shadow-lg">
+          <svg
+            class="w-9 h-9 text-brand-200"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <path d="M9.5 6C6.5 7 5 9.5 5 13v5h6v-6H8c0-2 .8-3.4 2.5-4L9.5 6Zm9 0c-3 1-4.5 3.5-4.5 7v5h6v-6h-3c0-2 .8-3.4 2.5-4L18.5 6Z" />
+          </svg>
+          <blockquote class="mt-4 flex-1 text-[15px] leading-relaxed text-slate-700">
+            "{t.quote}"
+          </blockquote>
+          <figcaption class="mt-6 border-t border-slate-100 pt-4">
+            <div class="font-semibold text-navy text-sm">{t.name}</div>
+            <div class="text-xs text-slate-500">{t.role}</div>
+          </figcaption>
+        </figure>
+      ))
+    }
+  </div>
+</section>

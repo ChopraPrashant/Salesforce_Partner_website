@@ -1,0 +1,52 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import PageHero from "../../components/PageHero.astro";
+import SectionHeading from "../../components/SectionHeading.astro";
+import ServiceCard from "../../components/ServiceCard.astro";
+import CTASection from "../../components/CTASection.astro";
+import { services } from "../../data/site";
+
+const categories = [
+  "Salesforce Clouds",
+  "Revenue & CPQ",
+  "Platform & Advisory",
+] as const;
+---
+
+<Layout
+  title="Services"
+  description="Explore Cubitous Infotech's Salesforce services: CRM implementation, Sales & Service Cloud, Revenue Cloud Advanced, Conga CPQ & CLM, Experience Cloud, integrations, AI, and managed support."
+>
+  <PageHero
+    eyebrow="Our Services"
+    title="Everything you need on Salesforce"
+    subtitle="Consulting, implementation, integration, AI, and ongoing support — across the Salesforce products your business depends on."
+    breadcrumb={[{ label: "Home", href: "/" }, { label: "Services" }]}
+  />
+
+  {
+    categories.map((cat, idx) => {
+      const items = services.filter((s) => s.category === cat);
+      return (
+        <section class={idx % 2 === 1 ? "bg-slate-50/70 py-10 sm:py-14" : "py-10 sm:py-14"}>
+          <div class="container-page">
+            <SectionHeading align="left" eyebrow={cat} title={cat} />
+            <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {items.map((s) => (
+                <ServiceCard service={s} />
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    })
+  }
+
+  <CTASection
+    title="Not sure where to start?"
+    subtitle="Tell us your goals and we'll recommend the right combination of services and a clear roadmap."
+    primaryLabel="Talk to an expert"
+    secondaryLabel="See training programs"
+    secondaryHref="/training"
+  />
+</Layout>

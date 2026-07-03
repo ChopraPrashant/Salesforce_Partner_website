@@ -1,0 +1,66 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/PageHero.astro";
+import { company } from "../data/site";
+
+const sections = [
+  {
+    h: "Information we collect",
+    p: "We collect information you provide directly — such as your name, email, phone number, company, and message — when you contact us, request a consultation, or apply for a role. We may also collect basic usage data through cookies and analytics to improve our website.",
+  },
+  {
+    h: "How we use your information",
+    p: "We use your information to respond to enquiries, provide our services, process job applications, improve our website, and send relevant communications you have requested. We do not sell your personal information.",
+  },
+  {
+    h: "Data sharing",
+    p: "We may share information with trusted service providers who help us operate our business (such as email, hosting, and analytics providers), strictly to perform services on our behalf and under appropriate confidentiality obligations.",
+  },
+  {
+    h: "Data security",
+    p: "We implement reasonable technical and organizational measures to protect your information. However, no method of transmission over the internet is completely secure.",
+  },
+  {
+    h: "Your rights",
+    p: "You may request access to, correction of, or deletion of your personal information by contacting us. We will respond in accordance with applicable data protection laws.",
+  },
+  {
+    h: "Cookies",
+    p: "Our website may use cookies to enhance your experience and understand how the site is used. You can control cookies through your browser settings.",
+  },
+];
+---
+
+<Layout title="Privacy Policy" description="Privacy Policy for Cubitous Infotech.">
+  <PageHero
+    title="Privacy Policy"
+    subtitle="How Cubitous Infotech collects, uses, and protects your information."
+    breadcrumb={[{ label: "Home", href: "/" }, { label: "Privacy Policy" }]}
+  />
+
+  <section class="container-page py-16 sm:py-20">
+    <div class="mx-auto max-w-3xl">
+      <p class="text-sm text-slate-500">
+        Last updated: {new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}
+      </p>
+      <div class="mt-8 space-y-8">
+        {
+          sections.map((s) => (
+            <div>
+              <h2 class="text-xl font-bold text-navy">{s.h}</h2>
+              <p class="mt-2 text-slate-600 leading-relaxed">{s.p}</p>
+            </div>
+          ))
+        }
+        <div>
+          <h2 class="text-xl font-bold text-navy">Contact us</h2>
+          <p class="mt-2 text-slate-600 leading-relaxed">
+            For any privacy-related questions, email us at
+            <a href={`mailto:${company.email}`} class="font-semibold text-brand-700 hover:underline">{company.email}</a>
+            or write to us at {company.address.full}.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>

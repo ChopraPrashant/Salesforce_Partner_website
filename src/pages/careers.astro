@@ -1,0 +1,373 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/PageHero.astro";
+import SectionHeading from "../components/SectionHeading.astro";
+import Icon from "../components/Icon.astro";
+import { openRoles, company } from "../data/site";
+
+const perks = [
+  { icon: "graduation", title: "Learn & get certified", desc: "Paid Salesforce certifications and continuous upskilling." },
+  { icon: "users", title: "Mentorship culture", desc: "Work alongside experienced Salesforce practitioners." },
+  { icon: "rocket", title: "Real, high-impact work", desc: "Own meaningful work on live client projects from day one." },
+  { icon: "target", title: "Growth path", desc: "Clear progression from trainee to consultant and beyond." },
+];
+---
+
+<Layout
+  title="Careers"
+  description="Join Cubitous Infotech. Explore Salesforce Developer, Administrator, CPQ consultant, and internship openings in Ahmedabad."
+>
+  <PageHero
+    eyebrow="Careers"
+    title="Build your Salesforce career with us"
+    subtitle="We're growing our team of Salesforce professionals in Ahmedabad. If you love solving problems and learning fast, you'll fit right in."
+    breadcrumb={[{ label: "Home", href: "/" }, { label: "Careers" }]}
+  />
+
+  <!-- WHY JOIN -->
+  <section class="container-page pt-10 sm:pt-14 pb-10 sm:pb-14">
+    <SectionHeading
+      eyebrow="Why join us"
+      title="A place to grow, not just work"
+      subtitle="We invest in our people with mentorship, certifications, and real ownership."
+    />
+    <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        perks.map((p) => (
+          <div class="reveal card-lift rounded-2xl bg-white p-6 ring-1 ring-slate-100 shadow-sm">
+            <span class="grid h-12 w-12 place-items-center rounded-xl bg-brand-50 text-brand-600">
+              <Icon name={p.icon} class="w-6 h-6" />
+            </span>
+            <h3 class="mt-5 font-bold text-navy">{p.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-slate-600">{p.desc}</p>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+
+  <!-- OPEN ROLES -->
+  <section class="bg-slate-50/70 py-10 sm:py-14">
+    <div class="container-page">
+      <SectionHeading
+        eyebrow="Open positions"
+        title="Current openings"
+        subtitle="Don't see a perfect match? We still want to hear from great people."
+      />
+      <div class="mt-12 space-y-4">
+        {
+          openRoles.map((role) => (
+            <div class="reveal group flex flex-col gap-4 rounded-2xl bg-white p-6 ring-1 ring-slate-100 shadow-sm sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <div class="flex flex-wrap items-center gap-3">
+                  <h3 class="text-lg font-bold text-navy">{role.title}</h3>
+                  <span class="rounded-full bg-brand-50 px-3 py-1 text-xs font-semibold text-brand-700">
+                    {role.type}
+                  </span>
+                </div>
+                <div class="mt-2 flex flex-wrap items-center gap-x-5 gap-y-1 text-sm text-slate-500">
+                  <span class="flex items-center gap-1.5">
+                    <Icon name="pin" class="w-4 h-4" />
+                    {role.location}
+                  </span>
+                  <span class="flex items-center gap-1.5">
+                    <Icon name="users" class="w-4 h-4" />
+                    {role.experience}
+                  </span>
+                </div>
+                <div class="mt-3 flex flex-wrap gap-2">
+                  {role.tags.map((t) => (
+                    <span class="rounded-md bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-600">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <a
+                href="#apply"
+                class="inline-flex shrink-0 items-center justify-center gap-2 rounded-full border border-brand-200 bg-white px-5 py-2.5 text-sm font-semibold text-brand-700 transition-colors hover:border-brand-400 hover:bg-brand-50"
+              >
+                Apply now
+                <Icon name="arrow" class="w-4 h-4" />
+              </a>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- APPLICATION FORM -->
+  <section id="apply" class="container-page pt-10 sm:pt-14 pb-10 sm:pb-14 scroll-mt-24">
+    <div class="grid lg:grid-cols-2 gap-12 items-start">
+      <div>
+        <SectionHeading
+          align="left"
+          eyebrow="Apply"
+          title="Send us your application"
+          subtitle="Fill in the form, add your cover note, and upload your resume. Our team reviews every application."
+        />
+        <div class="mt-8 rounded-2xl bg-slate-50 p-6 ring-1 ring-slate-100">
+          <p class="text-sm text-slate-600">
+            Prefer email? Send your resume to 
+            <a
+              href={`mailto:${company.email}`}
+              class="font-semibold text-brand-700 hover:underline"
+            >
+              {company.email}
+            </a>
+          </p>
+        </div>
+      </div>
+      <form
+        id="careers-form"
+        class="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-slate-100 sm:p-8 lg:sticky lg:top-28"
+        data-recipient={company.email}
+        novalidate
+      >
+        <div class="grid gap-5 sm:grid-cols-2">
+          <div>
+            <label for="career-name" class="mb-1.5 block text-sm font-semibold text-navy">
+              Full name *
+            </label>
+            <input
+              id="career-name"
+              name="name"
+              type="text"
+              required
+              class="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-100"
+              placeholder="Your name"
+            />
+          </div>
+          <div>
+            <label for="career-email" class="mb-1.5 block text-sm font-semibold text-navy">
+              Email *
+            </label>
+            <input
+              id="career-email"
+              name="email"
+              type="email"
+              required
+              class="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-100"
+              placeholder="you@example.com"
+            />
+          </div>
+          <div>
+            <label for="career-phone" class="mb-1.5 block text-sm font-semibold text-navy">
+              Contact number
+            </label>
+            <input
+              id="career-phone"
+              name="phone"
+              type="tel"
+              class="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-100"
+              placeholder="+91 ..."
+            />
+          </div>
+          <div>
+            <label for="career-position" class="mb-1.5 block text-sm font-semibold text-navy">
+              Position of interest
+            </label>
+            <input
+              id="career-position"
+              name="position"
+              type="text"
+              class="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-100"
+              placeholder="e.g. Salesforce Developer"
+            />
+          </div>
+        </div>
+
+        <div class="mt-5">
+          <label for="career-message" class="mb-1.5 block text-sm font-semibold text-navy">
+            Cover note *
+          </label>
+          <textarea
+            id="career-message"
+            name="message"
+            rows="5"
+            required
+            class="w-full rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-brand-500 focus:ring-2 focus:ring-brand-100"
+            placeholder="Tell us about yourself, your experience, and why you want to join Cubitous."
+          ></textarea>
+        </div>
+
+        <div class="mt-5">
+          <label for="career-resume" class="mb-1.5 block text-sm font-semibold text-navy">
+            Upload resume *
+          </label>
+          <input
+            id="career-resume"
+            name="resume"
+            type="file"
+            required
+            accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+            class="w-full rounded-xl border border-dashed border-slate-300 bg-slate-50 px-4 py-4 text-sm text-slate-700 outline-none transition file:mr-4 file:rounded-full file:border-0 file:bg-brand-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-brand-700 hover:border-brand-300 focus:border-brand-500 focus:ring-2 focus:ring-brand-100"
+          />
+          <p class="mt-1.5 text-xs text-slate-500">
+            Accepted formats: PDF, DOC, DOCX. Max size: 10 MB.
+          </p>
+        </div>
+
+        <p id="careers-form-error" class="mt-4 hidden rounded-lg bg-red-50 px-4 py-3 text-sm text-red-600"></p>
+
+        <button
+          type="submit"
+          class="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand-gradient px-7 py-3.5 text-base font-semibold text-white shadow-lg shadow-brand-600/25 transition hover:-translate-y-0.5 hover:shadow-xl sm:w-auto"
+        >
+          Submit Application
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <script>
+    const careersForm = document.getElementById("careers-form");
+    const careersError = document.getElementById("careers-form-error");
+
+    const invalidFieldStyle = {
+      borderColor: "#f87171",
+      boxShadow: "0 0 0 2px rgb(254 226 226)",
+    };
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phonePattern = /^\+?[\d\s().-]{7,20}$/;
+
+    const setFieldInvalid = (field) => {
+      if (!(field instanceof HTMLElement)) return;
+      field.setAttribute("aria-invalid", "true");
+      field.style.borderColor = invalidFieldStyle.borderColor;
+      field.style.boxShadow = invalidFieldStyle.boxShadow;
+    };
+
+    const clearFieldInvalid = (field) => {
+      if (!(field instanceof HTMLElement)) return;
+      field.removeAttribute("aria-invalid");
+      field.style.borderColor = "";
+      field.style.boxShadow = "";
+    };
+
+    const getFieldValue = (field) => {
+      if (field instanceof HTMLInputElement && field.type === "file") {
+        return field.files && field.files.length > 0 ? "file-selected" : "";
+      }
+      if (field instanceof HTMLInputElement || field instanceof HTMLTextAreaElement || field instanceof HTMLSelectElement) {
+        return field.value.trim();
+      }
+      return "";
+    };
+
+    const isValidPhone = (value) => {
+      if (!value) return true;
+      const digits = value.replace(/\D/g, "");
+      return phonePattern.test(value) && digits.length >= 7 && digits.length <= 15;
+    };
+
+    const validateCareersForm = (form) => {
+      let firstInvalid = null;
+
+      form.querySelectorAll("input, textarea, select").forEach(clearFieldInvalid);
+
+      form.querySelectorAll("[required]").forEach((field) => {
+        if (!getFieldValue(field)) {
+          setFieldInvalid(field);
+          firstInvalid ??= field;
+        }
+      });
+
+      const email = form.querySelector('input[type="email"]');
+      if (email instanceof HTMLInputElement && email.value.trim() && !emailPattern.test(email.value.trim())) {
+        setFieldInvalid(email);
+        firstInvalid ??= email;
+      }
+
+      const phone = form.querySelector('input[type="tel"]');
+      if (phone instanceof HTMLInputElement && !isValidPhone(phone.value.trim())) {
+        setFieldInvalid(phone);
+        firstInvalid ??= phone;
+      }
+
+      const resume = form.querySelector('input[type="file"]');
+      if (resume instanceof HTMLInputElement && resume.files?.[0]) {
+        const file = resume.files[0];
+        const validExtension = /\.(pdf|doc|docx)$/i.test(file.name);
+        if (!validExtension || file.size > 10 * 1024 * 1024) {
+          setFieldInvalid(resume);
+          firstInvalid ??= resume;
+        }
+      }
+
+      return firstInvalid;
+    };
+
+    careersForm?.querySelectorAll("input, textarea, select").forEach((field) => {
+      field.addEventListener("input", () => clearFieldInvalid(field));
+      field.addEventListener("change", () => clearFieldInvalid(field));
+    });
+
+    careersForm?.addEventListener("submit", (event) => {
+      event.preventDefault();
+
+      const form = event.currentTarget;
+      if (!(form instanceof HTMLFormElement)) return;
+
+      const errorBox = careersError instanceof HTMLElement ? careersError : null;
+      const formData = new FormData(form);
+      const resume = formData.get("resume");
+      const recipient = form.dataset.recipient || "contact@cubitous.com";
+
+      const showError = (message) => {
+        if (!errorBox) return;
+        errorBox.textContent = message;
+        errorBox.classList.remove("hidden");
+      };
+
+      errorBox?.classList.add("hidden");
+
+      const firstInvalid = validateCareersForm(form);
+      if (firstInvalid instanceof HTMLElement) {
+        showError("Please fill all required fields and enter a valid email/phone number.");
+        firstInvalid.focus();
+        return;
+      }
+
+      if (!(resume instanceof File) || resume.size === 0) {
+        const resumeInput = form.querySelector('input[type="file"]');
+        setFieldInvalid(resumeInput);
+        showError("Please upload your resume.");
+        return;
+      }
+
+      if (!/\.(pdf|doc|docx)$/i.test(resume.name)) {
+        const resumeInput = form.querySelector('input[type="file"]');
+        setFieldInvalid(resumeInput);
+        showError("Please upload a PDF, DOC, or DOCX resume.");
+        return;
+      }
+
+      if (resume.size > 10 * 1024 * 1024) {
+        const resumeInput = form.querySelector('input[type="file"]');
+        setFieldInvalid(resumeInput);
+        showError("Resume must be under 10 MB.");
+        return;
+      }
+
+      const subject = encodeURIComponent(`Career application: ${formData.get("position") || "General"}`);
+      const body = encodeURIComponent(
+        [
+          `Name: ${formData.get("name")}`,
+          `Email: ${formData.get("email")}`,
+          `Contact number: ${formData.get("phone") || "-"}`,
+          `Position: ${formData.get("position") || "-"}`,
+          "",
+          "Cover note:",
+          formData.get("message"),
+          "",
+          `Selected resume file: ${resume.name}`,
+          "Please attach the selected resume file before sending this email.",
+        ].join("\n"),
+      );
+
+      window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
+    });
+  </script>
+</Layout>

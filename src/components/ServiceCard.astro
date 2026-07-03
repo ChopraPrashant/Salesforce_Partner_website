@@ -1,0 +1,89 @@
+---
+import Icon from "./Icon.astro";
+import type { Service } from "../data/site";
+import agentforceEinsteinAi from "../Images/Agentforce_Einstein_AI.png";
+import congaClm from "../Images/Conga_CLM.png";
+import congaCpq from "../Images/Conga_CPQ.png";
+import experienceCloud from "../Images/ExperienceCloud.png";
+import integrationDataMigration from "../Images/Integratioin_DataMigration.png";
+import managedServices from "../Images/ManagedServices.png";
+import rca from "../Images/RCA.png";
+import salesCloud from "../Images/SalesCloud.png";
+import salesforceLogo from "../Images/Salesforce_Logo.jpg";
+import serviceCloud from "../Images/ServiceCloud.png";
+
+interface Props {
+  service: Service;
+}
+const { service } = Astro.props;
+
+const bgImages: Record<string, { src: string }> = {
+  "salesforce-crm": salesforceLogo,
+  "sales-cloud": salesCloud,
+  "service-cloud": serviceCloud,
+  "revenue-cloud-advanced": rca,
+  "experience-cloud": experienceCloud,
+  "conga-cpq": congaCpq,
+  "conga-clm": congaClm,
+  "integration-services": integrationDataMigration,
+  "agentforce-ai": agentforceEinsteinAi,
+  "managed-services": managedServices,
+};
+const bg = bgImages[service.slug];
+const isLogoOnlyImage = service.slug === "salesforce-crm";
+---
+
+{
+  bg ? (
+    <a
+      href={`/services/${service.slug}`}
+      class="card-lift group relative flex flex-col overflow-hidden rounded-2xl bg-white ring-1 ring-slate-100 shadow-sm hover:shadow-xl hover:ring-brand-200"
+    >
+      <div class={`relative aspect-[4/3] w-full overflow-hidden ${isLogoOnlyImage ? "bg-white" : ""}`}>
+        <img
+          src={bg.src}
+          alt={service.title}
+          loading="lazy"
+          class={`absolute inset-0 h-full w-full transition-transform duration-500 group-hover:scale-105 ${
+            isLogoOnlyImage ? "object-contain p-10 sm:p-12" : "object-cover"
+          }`}
+        />
+      </div>
+      <div class="flex items-center justify-between gap-3 border-t border-slate-100 p-5">
+        <div class="flex items-center gap-3">
+          <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand-600 transition-colors group-hover:bg-brand-gradient group-hover:text-white">
+            <Icon name={service.icon} class="w-5 h-5" />
+          </span>
+          <h3 class="text-base font-bold text-navy">{service.title}</h3>
+        </div>
+        <span class="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-600">
+          <span class="hidden sm:inline">Learn more</span>
+          <Icon
+            name="arrow"
+            class="w-4 h-4 transition-transform group-hover:translate-x-1"
+          />
+        </span>
+      </div>
+    </a>
+  ) : (
+    <a
+      href={`/services/${service.slug}`}
+      class="card-lift group relative flex flex-col rounded-2xl bg-white p-6 ring-1 ring-slate-100 shadow-sm hover:shadow-xl hover:ring-brand-200"
+    >
+      <span class="grid place-items-center h-12 w-12 rounded-xl bg-brand-50 text-brand-600 group-hover:bg-brand-gradient group-hover:text-white transition-colors">
+        <Icon name={service.icon} class="w-6 h-6" />
+      </span>
+      <h3 class="mt-5 text-lg font-bold text-navy">{service.title}</h3>
+      <p class="mt-2 text-sm leading-relaxed text-slate-600 flex-1">
+        {service.short}
+      </p>
+      <span class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-brand-600">
+        Learn more
+        <Icon
+          name="arrow"
+          class="w-4 h-4 transition-transform group-hover:translate-x-1"
+        />
+      </span>
+    </a>
+  )
+}

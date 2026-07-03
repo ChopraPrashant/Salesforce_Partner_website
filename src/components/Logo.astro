@@ -1,0 +1,29 @@
+---
+import companyLogo from "../Images/Company_Logo.jpg";
+import { company } from "../data/site";
+
+/**
+ * Company logo.
+ * - Default: an inline "cube" mark + wordmark (no image needed).
+ * - When you add your logo file: put it at /public/logo.svg and set
+ *   `hasLogoImage: true` in src/data/site.ts (or change the src below to .png).
+ */
+interface Props {
+  variant?: "dark" | "light"; // text color context
+  class?: string;
+}
+const { variant = "dark", class: className = "" } = Astro.props;
+void variant;
+---
+
+<a
+  href="/"
+  class={`inline-flex items-center group ${className}`}
+  aria-label={`${company.name} — home`}
+>
+  <img
+    src={companyLogo.src}
+    alt={company.name}
+    class="h-14 w-auto rounded-sm object-contain transition-transform duration-200 group-hover:scale-[1.03] sm:h-16 lg:h-[4.5rem]"
+  />
+</a>

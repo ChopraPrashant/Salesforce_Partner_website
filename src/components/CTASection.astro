@@ -1,0 +1,50 @@
+---
+import Button from "./Button.astro";
+
+interface Props {
+  title?: string;
+  subtitle?: string;
+  primaryLabel?: string;
+  primaryHref?: string;
+  secondaryLabel?: string;
+  secondaryHref?: string;
+}
+const {
+  title = "Ready to get more from Salesforce?",
+  subtitle = "Let's talk about your goals. Book a free consultation and we'll recommend the right path forward — no obligation.",
+  primaryLabel = "Book a Free Consultation",
+  primaryHref = "/contact",
+  secondaryLabel = "Explore Services",
+  secondaryHref = "/services",
+} = Astro.props;
+---
+
+<section class="container-page pt-8 sm:pt-10 pb-12 sm:pb-16">
+  <div
+    class="reveal relative overflow-hidden rounded-3xl bg-navy-gradient px-6 py-14 sm:px-14 sm:py-16 text-center"
+  >
+    <div class="absolute inset-0 bg-grid opacity-60"></div>
+    <div class="absolute -top-24 -right-24 h-64 w-64 rounded-full glow-brand-soft"></div>
+    <div class="absolute -bottom-24 -left-24 h-64 w-64 rounded-full glow-accent"></div>
+    <div class="relative max-w-2xl mx-auto">
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+        {title}
+      </h2>
+      <p class="mt-4 text-base sm:text-lg text-brand-100/80 leading-relaxed">
+        {subtitle}
+      </p>
+      <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+        <Button href={primaryHref} variant="white" size="lg" icon="arrow">
+          {primaryLabel}
+        </Button>
+        <Button
+          href={secondaryHref}
+          size="lg"
+          class="!bg-white/10 !text-white hover:!bg-white/20 border border-white/20"
+        >
+          {secondaryLabel}
+        </Button>
+      </div>
+    </div>
+  </div>
+</section>

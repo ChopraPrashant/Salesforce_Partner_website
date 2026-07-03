@@ -1,5 +1,23 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 
+import tailwindcss from '@tailwindcss/vite';
+
+import react from '@astrojs/react';
+
 // https://astro.build/config
-export default defineConfig({});
+export default defineConfig({
+  // Update this to your production domain for correct canonical/OG URLs.
+  site: 'https://www.cubitousinfotech.com',
+
+  vite: {
+    plugins: [tailwindcss()],
+    server: {
+      allowedHosts: [
+        '.ngrok-free.app'
+      ]
+    }
+  },
+
+  integrations: [react()]
+});

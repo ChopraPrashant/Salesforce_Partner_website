@@ -1,0 +1,241 @@
+---
+import Layout from "../layouts/Layout.astro";
+import PageHero from "../components/PageHero.astro";
+import Icon from "../components/Icon.astro";
+import CTASection from "../components/CTASection.astro";
+import b2bSaasImage from "../Images/B2B_SaaS.png";
+import manufacturingImage from "../Images/Manufacturing.png";
+import financialServicesImage from "../Images/FinancialServices.png";
+import technologyImage from "../Images/Technology.png";
+import brillioImage from "../Images/brillio.jpeg";
+import rocheImage from "../Images/roche.png";
+import gartnerImage from "../Images/gartner.png";
+import baxterImage from "../Images/baxter.jpeg";
+import illuminaImage from "../Images/illumina.jpeg";
+import pslImage from "../Images/PSL.jpeg";
+
+const projects = [
+  {
+    tag: "PSL",
+    icon: "code",
+    image: pslImage.src,
+    imageClass: "object-contain p-12 sm:p-16",
+    title: "Nearshore services operations on Salesforce",
+    challenge:
+      "A software delivery firm needs a stronger way to connect sales opportunities with staffing, delivery readiness, and client success updates.",
+    solution:
+      "We mapped Salesforce processes for opportunity qualification, resource planning signals, delivery transitions, and leadership dashboards.",
+    results: [
+      { value: "1", label: "Shared delivery view" },
+      { value: "40%", label: "Less manual reporting" },
+    ],
+  },
+  {
+    tag: "Illumina",
+    icon: "target",
+    image: illuminaImage.src,
+    imageClass: "object-contain p-12 sm:p-16",
+    title: "Genomics customer support and case routing",
+    challenge:
+      "A genomics technology organization needs fast, accurate support routing for specialized products, research customers, and technical inquiries.",
+    solution:
+      "We shaped a Service Cloud model with case categorization, expert routing, knowledge capture, and service performance reporting.",
+    results: [
+      { value: "30%", label: "Faster case routing" },
+      { value: "24/7", label: "Knowledge access" },
+    ],
+  },
+  {
+    tag: "Baxter",
+    icon: "shield",
+    image: baxterImage.src,
+    imageClass: "object-contain p-12 sm:p-16",
+    title: "Healthcare service operations and account care",
+    challenge:
+      "A healthcare products organization needs dependable service processes for account teams, customer requests, and regulated operational follow-ups.",
+    solution:
+      "We planned Salesforce workflows for account service, request tracking, escalation visibility, and operational reporting.",
+    results: [
+      { value: "45%", label: "Quicker escalations" },
+      { value: "100%", label: "Request visibility" },
+    ],
+  },
+  {
+    tag: "Brillio",
+    icon: "rocket",
+    image: brillioImage.src,
+    imageClass: "object-contain p-12 sm:p-16",
+    title: "Digital services pipeline and delivery visibility",
+    challenge:
+      "A digital services organization needs clean account data, reliable opportunity tracking, and better visibility across sales and delivery teams.",
+    solution:
+      "We modeled a Salesforce roadmap around account planning, delivery handoffs, project visibility, and executive dashboards for faster decision-making.",
+    results: [
+      { value: "360°", label: "Account visibility" },
+      { value: "2x", label: "Pipeline clarity" },
+    ],
+  },
+  {
+    tag: "Gartner",
+    icon: "chart",
+    image: gartnerImage.src,
+    imageClass: "object-contain p-12 sm:p-16",
+    title: "Research advisory engagement intelligence",
+    challenge:
+      "An advisory and research business needs a clear view of client engagement, subscription opportunities, and relationship health.",
+    solution:
+      "We modeled Salesforce around account intelligence, advisory touchpoints, renewal tracking, and leadership-ready revenue dashboards.",
+    results: [
+      { value: "360°", label: "Client engagement view" },
+      { value: "25%", label: "Renewal signal lift" },
+    ],
+  },
+  {
+    tag: "Roche",
+    icon: "shield",
+    image: rocheImage.src,
+    imageClass: "object-contain p-12 sm:p-16",
+    title: "Life sciences CRM and compliance workflows",
+    challenge:
+      "A healthcare and diagnostics business requires compliant customer engagement, traceable field activity, and strong reporting across regions.",
+    solution:
+      "We designed Salesforce workflows for healthcare account teams with structured approvals, activity capture, and management reporting.",
+    results: [
+      { value: "100%", label: "Process traceability" },
+      { value: "35%", label: "Faster follow-ups" },
+    ],
+  },
+  {
+    tag: "Manufacturing",
+    icon: "config",
+    image: manufacturingImage.src,
+    title: "Faster, error-free quoting with Conga CPQ",
+    challenge:
+      "A manufacturer struggled with slow, manual quoting and frequent pricing errors on complex configurable products.",
+    solution:
+      "We implemented Conga CPQ with guided selling, pricing rules, and approval workflows integrated into their Salesforce org.",
+    results: [
+      { value: "60%", label: "Faster quote turnaround" },
+      { value: "0", label: "Pricing errors post go-live" },
+    ],
+  },
+  {
+    tag: "B2B SaaS",
+    icon: "chart",
+    image: b2bSaasImage.src,
+    title: "Sales Cloud rollout that reps love",
+    challenge:
+      "A growing SaaS company had fragmented sales data and low CRM adoption across the team.",
+    solution:
+      "We redesigned their Sales Cloud with clean pipeline stages, automation, and dashboards, plus hands-on adoption training.",
+    results: [
+      { value: "90%+", label: "Active user adoption" },
+      { value: "2x", label: "Forecast accuracy" },
+    ],
+  },
+  {
+    tag: "Financial Services",
+    icon: "community",
+    image: financialServicesImage.src,
+    title: "Self-service portal on Experience Cloud",
+    challenge:
+      "High support volumes and no digital self-service channel for customers.",
+    solution:
+      "We built a branded Experience Cloud portal with knowledge, case submission, and secure account access.",
+    results: [
+      { value: "35%", label: "Fewer support tickets" },
+      { value: "24/7", label: "Self-service access" },
+    ],
+  },
+  {
+    tag: "Technology",
+    icon: "plug",
+    image: technologyImage.src,
+    imageClass: "object-cover",
+    title: "Salesforce–ERP integration & data migration",
+    challenge:
+      "Disconnected systems meant duplicated data entry and unreliable reporting.",
+    solution:
+      "We integrated Salesforce with their ERP via APIs and migrated clean, de-duplicated data with full validation.",
+    results: [
+      { value: "1", label: "Single source of truth" },
+      { value: "100%", label: "Automated data sync" },
+    ],
+  },
+];
+---
+
+<Layout
+  title="Projects Delivered"
+  description="See how Cubitous Infotech delivers measurable results on Salesforce — CPQ, Sales Cloud, Experience Cloud, and integrations."
+>
+  <PageHero
+    eyebrow="Projects Delivered"
+    title="Results that speak for themselves"
+    subtitle="A look at how we help clients solve real problems and drive measurable outcomes on the Salesforce platform."
+    breadcrumb={[{ label: "Home", href: "/" }, { label: "Projects" }]}
+  />
+
+  <section class="container-page pt-10 sm:pt-14 pb-4 sm:pb-6">
+    <div class="grid gap-8 lg:grid-cols-2">
+      {
+        projects.map((c) => (
+          <article class="reveal card-lift group flex flex-col overflow-hidden rounded-2xl bg-white ring-1 ring-slate-100 shadow-sm hover:ring-brand-200 hover:shadow-xl">
+            <div class="relative aspect-[4/3] overflow-hidden bg-white">
+              <img
+                src={c.image}
+                alt={c.title}
+                loading="lazy"
+                class={`h-full w-full ${c.imageClass ?? "object-contain"} transition-transform duration-500 group-hover:scale-[1.02]`}
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/10 to-transparent" />
+              <div class="absolute right-4 top-4 flex items-center gap-2">
+                <span class="grid h-9 w-9 place-items-center rounded-lg bg-white/90 text-brand-600">
+                  <Icon name={c.icon} class="w-5 h-5" />
+                </span>
+                <span class="rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-slate-700">
+                  {c.tag}
+                </span>
+              </div>
+              <h3 class="absolute bottom-4 left-4 right-4 text-xl font-bold text-white drop-shadow">
+                {c.title}
+              </h3>
+            </div>
+
+            <div class="flex flex-1 flex-col p-7">
+              <div class="space-y-3 text-sm leading-relaxed text-slate-600">
+                <p>
+                  <span class="font-semibold text-navy">Challenge: </span>
+                  {c.challenge}
+                </p>
+                <p>
+                  <span class="font-semibold text-navy">Solution: </span>
+                  {c.solution}
+                </p>
+              </div>
+
+              <div class="mt-auto grid grid-cols-2 gap-4 border-t border-slate-100 pt-5">
+                {c.results.map((r) => (
+                  <div>
+                    <div class="text-2xl font-extrabold text-gradient">{r.value}</div>
+                    <div class="text-xs font-medium text-slate-500">{r.label}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+
+    <p class="mt-10 text-center text-xs text-slate-400">
+      Projects shown are illustrative of our capabilities. Real client details
+      available on request.
+    </p>
+  </section>
+
+  <CTASection
+    title="Want results like these?"
+    subtitle="Let's talk about your goals and how we can help you achieve measurable outcomes on Salesforce."
+  />
+</Layout>
