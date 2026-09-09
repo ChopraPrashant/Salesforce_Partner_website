@@ -1,14 +1,15 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 
+import sitemap from '@astrojs/sitemap';
+
 import tailwindcss from '@tailwindcss/vite';
 
 import react from '@astrojs/react';
 
 // https://astro.build/config
 export default defineConfig({
-  // Update this to your production domain for correct canonical/OG URLs.
-  site: 'https://www.cubitousinfotech.com',
+  site: 'https://www.cubitous.com',
 
   vite: {
     plugins: [tailwindcss()],
@@ -19,5 +20,5 @@ export default defineConfig({
     }
   },
 
-  integrations: [react()]
+  integrations: [react(), sitemap()]
 });
