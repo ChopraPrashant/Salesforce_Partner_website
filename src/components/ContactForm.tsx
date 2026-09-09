@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from "react";
 
+
 /**
  * Frontend contact form with client-side validation.
  *
